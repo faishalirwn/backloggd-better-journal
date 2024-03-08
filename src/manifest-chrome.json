@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Backloggd Enhanced",
+  "description": "Add quality of life improvements to Backloggd",
+  "version": "0.1",
+  "icons": {
+    "128": "images/shart128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.backloggd.com/*"],
+      "js": ["content-script.js"],
+      "css": ["style.css"]
+    }
+  ]
+}
