@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "Backloggd Enhanced",
-  "description": "Add quality of life improvements to Backloggd",
+  "name": "Backloggd Better Journal",
+  "description": "Show Backloggd journal notes and add edit button to journal entries.",
   "version": "0.1",
   "icons": {
-    "128": "images/shart128.png"
+    "128": "images/icon128.png"
   },
   "content_scripts": [
     {
