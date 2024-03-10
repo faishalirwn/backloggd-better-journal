@@ -3,7 +3,7 @@ const journalEntriesEl = document.querySelectorAll(".journal_entry");
 Array.from(journalEntriesEl).map((entry, i) => {
   addExpandedNote(entry);
   addReviewButton(entry);
-  onmount();
+  chrome.runtime.sendMessage({ type: "INJECT_SCRIPT" });
 });
 
 const mutationCallback = (mutationsList: MutationRecord[]) => {
@@ -13,11 +13,12 @@ const mutationCallback = (mutationsList: MutationRecord[]) => {
         const journalEntriesEl = node.querySelectorAll(".journal_entry");
         if (journalEntriesEl.length > 0) {
           deleteExpandedNote();
+          deleteReviewButton();
           Array.from(journalEntriesEl).map((entry) => {
             addExpandedNote(entry);
             addReviewButton(entry);
           });
-          onmount();
+          chrome.runtime.sendMessage({ type: "INJECT_SCRIPT" });
         }
       }
     });
@@ -30,7 +31,7 @@ observer.observe(targetNode, config);
 
 function deleteExpandedNote() {
   document
-    .querySelectorAll(".expanded-note")
+    .querySelectorAll(".be-expanded-note")
     .forEach((expandedNote) => expandedNote.remove());
 }
 
@@ -43,7 +44,7 @@ function addExpandedNote(journalEntryNode: Element) {
       journalEntryNode.querySelector(".date-entry")?.nextElementSibling;
 
     const rowDiv = document.createElement("div");
-    rowDiv.className = "row mb-2 mt-2 mx-0 expanded-note";
+    rowDiv.className = "row mb-2 mt-2 mx-0 be-expanded-note";
     const noteDiv = document.createElement("div");
     noteDiv.className = "col-auto my-auto";
     noteDiv.textContent = note;
@@ -55,6 +56,12 @@ function addExpandedNote(journalEntryNode: Element) {
   }
 }
 
+function deleteReviewButton() {
+  document
+    .querySelectorAll(".be-quick-journal")
+    .forEach((reviewBtn) => reviewBtn.remove());
+}
+
 function addReviewButton(journalEntryNode: Element) {
   const gameId = journalEntryNode
     .querySelector(".game-cover")
@@ -62,15 +69,22 @@ function addReviewButton(journalEntryNode: Element) {
   const quickIconsWrapper = journalEntryNode.querySelector(
     ".journal-quick-icons"
   );
+  const firstIcon =
+    journalEntryNode.querySelector(".fa-align-justify")?.parentNode?.parentNode;
 
   if (gameId && quickIconsWrapper) {
-    const reviewButton = document.createElement("a");
-    reviewButton.className = "quick-journal";
-    reviewButton.setAttribute("game_id", gameId);
+    const reviewBtnWrapper = document.createElement("div");
+    reviewBtnWrapper.className = "col-auto my-auto px-1";
+    const reviewBtn = document.createElement("a");
+    reviewBtn.className = "quick-journal be-quick-journal";
+    reviewBtn.setAttribute("game_id", gameId);
     const icon = document.createElement("i");
     icon.className = "fas fa-pencil";
-    reviewButton.appendChild(icon);
+    reviewBtn.appendChild(icon);
+    reviewBtnWrapper.appendChild(reviewBtn);
 
-    quickIconsWrapper.appendChild(reviewButton);
+    if (firstIcon) {
+      quickIconsWrapper.insertBefore(reviewBtnWrapper, firstIcon);
+    }
   }
 }

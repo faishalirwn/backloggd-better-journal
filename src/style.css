@@ -1,3 +1,7 @@
-.expanded-note {
+.be-expanded-note {
   font-weight: 400;
+}
+
+.be-quick-journal {
+  cursor: pointer;
 }

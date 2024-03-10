@@ -12,5 +12,11 @@
       "js": ["content-script.js"],
       "css": ["style.css"]
     }
-  ]
+  ],
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "permissions": ["background", "tabs", "scripting"],
+  "host_permissions": ["https://www.backloggd.com/*"]
 }
