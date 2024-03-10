@@ -7,7 +7,7 @@ declare global {
 }
 
 chrome.runtime.onMessage.addListener(async (request) => {
-  if (request.type === "INJECT_SCRIPT") {
+  if (request.type === "TRIGGER_ONMOUNT") {
     chrome.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
       chrome.scripting.executeScript({
         target: { tabId: tabs[0].id as number },

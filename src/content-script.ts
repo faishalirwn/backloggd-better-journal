@@ -3,7 +3,7 @@ const journalEntriesEl = document.querySelectorAll(".journal_entry");
 Array.from(journalEntriesEl).map((entry, i) => {
   addExpandedNote(entry);
   addReviewButton(entry);
-  chrome.runtime.sendMessage({ type: "INJECT_SCRIPT" });
+  chrome.runtime.sendMessage({ type: "TRIGGER_ONMOUNT" });
 });
 
 const mutationCallback = (mutationsList: MutationRecord[]) => {
@@ -18,7 +18,7 @@ const mutationCallback = (mutationsList: MutationRecord[]) => {
             addExpandedNote(entry);
             addReviewButton(entry);
           });
-          chrome.runtime.sendMessage({ type: "INJECT_SCRIPT" });
+          chrome.runtime.sendMessage({ type: "TRIGGER_ONMOUNT" });
         }
       }
     });
