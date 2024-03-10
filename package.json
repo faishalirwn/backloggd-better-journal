@@ -1,12 +1,10 @@
 {
-  "name": "backloggd-enhanced",
+  "name": "backloggd-better-journal",
   "version": "0.1",
-  "description": "",
+  "description": "Show Backloggd journal notes and add edit button to journal entries.",
   "scripts": {
     "zip:chrome": "pnpm run build:chrome && mkdirp out && npm-build-zip --source=dist --destination=out --name=chrome",
-    "zip:firefox": "pnpm run build:firefox && mkdirp out && npm-build-zip --source=dist --destination=out --name=firefox",
     "build:chrome": "pnpm run build:shared && renamer dist/manifest-chrome.json --replace manifest.json && rimraf ./dist/manifest-firefox.json",
-    "build:firefox": "pnpm run build:shared && renamer dist/manifest-firefox.json --replace manifest.json && rimraf ./dist/manifest-chrome.json",
     "build:shared": "pnpm run clean && npx tsc --build && copyfiles -u 1 'src/**/*.!(ts)' dist",
     "clean": "rimraf ./dist && rimraf ./out",
     "dev": "npx tsc --watch"
