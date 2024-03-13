@@ -17,6 +17,6 @@
     "service_worker": "service-worker.js",
     "type": "module"
   },
-  "permissions": ["background", "tabs", "scripting"],
+  "permissions": ["background", "scripting"],
   "host_permissions": ["https://www.backloggd.com/*"]
 }
