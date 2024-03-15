@@ -1,8 +1,8 @@
 # Backloggd Better Journal
 
-📄 Show Backloggd journal notes by default
+📒 Show Backloggd journal notes by default
 
-✏️ Add edit button to journal entries for quicker edit
+📝 Add edit button to journal entries for quicker edit
 
 Useful for anyone who uses journal as a replacement for private review.
 
